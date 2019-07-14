@@ -29,7 +29,7 @@ public class BinarySearch {
         parent.right = this.createNode(x);
     }
 
-    Node addnode(Node node, int x) {
+    Node getNode(Node node, int x) {
         while (true) {
 
             if (x > node.value && node.right == null) {
@@ -37,14 +37,14 @@ public class BinarySearch {
 
             }
             if (x > node.value) {
-                this.addnode(node.right, x);
+                getNode(node.right, x);
             }
 
             if (x < node.value && node.left == null) {
                 this.addLeft(node, x);
             }
             if (x < node.value) {
-                this.addnode(node.left, x);
+                getNode(node.left, x);
             }
 
 
@@ -54,7 +54,7 @@ public class BinarySearch {
 
 
     Node adds(int x) {
-        return addnode(this.root, x);
+        return getNode(this.root, x);
     }
 
     public void sortthis(Node node) {
