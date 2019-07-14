@@ -1,16 +1,15 @@
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class BinarySearch {
 
     private Node root;
 
     public BinarySearch(int x) {
-        this.root = this.getNode(x);
+        this.root = this.createNode(x);
     }
 
 
-    public Node getNode(int x) {
+    public Node createNode(int x) {
 
         Node node = new Node();
         node.value = x;
@@ -19,41 +18,47 @@ public class BinarySearch {
         return node;
     }
 
+
     private void addLeft(Node parent, int x) {
 
-        parent.left = this.getNode(x);
+        parent.left = this.createNode(x);
     }
 
     private void addRight(Node parent, int x) {
 
-        parent.right = this.getNode(x);
+        parent.right = this.createNode(x);
     }
 
-    void addnode(Node node, int x) {
-        if (x > node.value && node.right == null) {
-            this.addRight(node, x);
+    Node addnode(Node node, int x) {
+        while (true) {
 
-        }
-        if (x > node.value) {
-            this.addnode(node.right, x);
-        }
+            if (x > node.value && node.right == null) {
+                this.addRight(node, x);
 
-        if (x < node.value && node.left == null) {
-            this.addLeft(node, x);
-            return;
-        }
-        if (x < node.value) {
-            this.addnode(node.left, x);
-        }
+            }
+            if (x > node.value) {
+                this.addnode(node.right, x);
+            }
 
+            if (x < node.value && node.left == null) {
+                this.addLeft(node, x);
+            }
+            if (x < node.value) {
+                this.addnode(node.left, x);
+            }
+
+
+            return node;
+        }
     }
 
-    void adds(int x) {
-        addnode(this.root, x);
+
+    Node adds(int x) {
+        return addnode(this.root, x);
     }
 
     public void sortthis(Node node) {
-        if (node == null) ;
+
         if (node != null) {
             sortthis(node.left);
             System.out.print(node.value + " ");
@@ -63,6 +68,7 @@ public class BinarySearch {
 
     }
 
+
     public static void main(String[] args) {
         BinarySearch serech = new BinarySearch(5);
         serech.adds(7);
@@ -70,7 +76,6 @@ public class BinarySearch {
         serech.adds(6);
         serech.adds(1);
         serech.adds(11);
-
         serech.sortthis(serech.root);
 
     }
